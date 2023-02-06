@@ -1,18 +1,17 @@
 #!/bin/bash
 
-if [ "$#" -ne 1 ]; then
-  echo "Uso: $0 X"
-  echo "Donde X es el número de subdirectorios a crear"
-  exit 1
+if [ $# -ne 1 ] || [$1 -le 0]; then
+  echo "Debes ejecutar el script como: $0 n"
+  echo "Donde n es un número mayor que 0"
+  exit
 fi
 
-X=$2
-
 while read nombre; do
-  mkdir "$nombre"
-  cd "$nombre"
-  for i in $(seq 1 "$X"); do
-    mkdir "Personal$i"
+  mkdir $nombre
+  X=1
+  while [ $X -le $1]; do
+      mkdir "$nombre/personal$X"
+      #X=$((X+1))
+      ((X++))
   done
-  cd ..
 done < nombres.txt

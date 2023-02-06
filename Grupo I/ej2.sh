@@ -1,23 +1,21 @@
 #!/bin/bash
 
-pares=0
-impares=0
+for num in $(cat numeros.txt); do
+    let resto=$num%2
 
-echo "Números pares:"
-while read numero; do
-  if [ $((numero % 2)) -eq 0 ]; then
-    echo $numero
-    ((pares++))
-  fi
-done < numeros.txt
+    if[ $resto -eq 0];then
+      echo $num >> pares
+    else
+      echo $num >> impares
+    fi
+done
 
-echo "Números impares:"
-while read numero; do
-  if [ $((numero % 2)) -ne 0 ]; then
-    echo $numero
-    ((impares++))
-  fi
-done < numeros.txt
+echo "PARES: Hay $(cat pares | wc -l)"
+echo "-----"
+cat pares
+echo " "
+echo "IMPARES: Hay $(cat impares | wc -l)"
+echo "-----"
+cat impares
 
-echo "Total de números pares: $pares"
-echo "Total de números impares: $impares"
+rm -rf pares impares

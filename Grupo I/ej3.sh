@@ -11,15 +11,13 @@ while read linea; do
   procesos=$(echo "$linea" | awk '{print $3}')
 
    if [ "$sistema" = "Linux" ]; then
-    ((linux++))
-    ((procesos_linux+=procesos))
-  elif [ "$sistema" = "Windows" ]; then
-    ((windows++))
-    ((procesos_windows+=procesos))
+    linux=$((linux+1))
+    procesos_linux=$((procesos_linux+procesos))
+  else
+    windows=$((windows+1))
+    procesos_windows=$((procesos_windows+procesos))
   fi
-done
+done < listado.txt
 
-echo "Número de usuarios con Linux: $linux"
-echo "Número de usuarios con Windows: $windows"
-echo "Total de procesos en Linux: $procesos_linux"
-echo "Total de procesos en Windows: $procesos_windows"
+echo "Linux=> $linux usuarios y $procesos_linux procesos"
+echo "Windows=> $windows usuarios y $procesos_windows procesos"
