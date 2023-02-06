@@ -17,7 +17,7 @@ while read linea; do
     ((windows++))
     ((procesos_windows+=procesos))
   fi
-done < listado.txt
+done
 
 echo "Número de usuarios con Linux: $linux"
 echo "Número de usuarios con Windows: $windows"
